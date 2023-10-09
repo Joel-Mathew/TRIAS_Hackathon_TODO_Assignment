@@ -1,0 +1,40 @@
+<div class="todo-list-constainer">
+    <div class="input-fields">
+        <input class="input"  type="text" placeholder="Enter the new Task" #taskName>
+        <input class="input" type="text" placeholder="Enter the description" #taskDesc>    
+        <input class="input" type="date" placeholder="Enter the date" #taskDate>
+        <input class="input" type="time" placeholder="Enter the time" #taskTime>
+        <button class="button" (click)="addTask(taskName.value, taskDesc.value, taskDate.value, taskTime.value)">Add</button>
+    </div>
+
+    <br><br>
+    <ul class="toDo-Items">
+        <li *ngFor="let task of tasks" class="toDo-Item">
+            <div class="task">
+                <p>{{ task.taskName }}</p> 
+                <p>{{ task.taskDescription }}</p> 
+                <p>{{task.taskDate}}</p>
+            </div>
+            <div class="actions">
+                <button class="button" (click)="editTask(task)">Edit</button>
+                <button class="button" (click)="deleteTask(task.idTasks)">Delete</button>
+            </div>
+        </li>
+    </ul>
+    
+    
+    <!-- Input fields for editing tasks -->
+    <div *ngIf="selectedTask" class="input-fields">
+        <h4>Edit Task</h4><br>
+        <!-- <label for="editTaskName">Task Name:</label> -->
+        <input class="input" type="text" id="editTaskName" [(ngModel)]="selectedTask.taskName" />
+        <!-- <label for="editTaskDescription">Task Description:</label> -->
+        <input class="input" type="text" id="editTaskDescription" [(ngModel)]="selectedTask.taskDescription" />
+        <!-- <label for="editTaskDate">Task Date:</label> -->
+        <input class="input" type="date" id="editTaskDate" [(ngModel)]="selectedTask.taskDate" />
+        <!-- <label for="editTaskTime">Task Time:</label> -->
+        <input class="input" type="time" id="editTaskTime" [(ngModel)]="selectedTask.taskTime" />
+        <button class="button" (click)="updateTask(selectedTask)">Save</button>
+    </div>
+
+</div>
